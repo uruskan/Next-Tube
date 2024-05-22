@@ -51,7 +51,7 @@
   padding: 1rem;
   color: var(--text-color); /* Consistent text color */
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Consistent shadow */
-  /* Ensure it grows to fill the space */
+  ;
   overflow: scroll;
   text-align: center;
   background: linear-gradient(to right, #2c3e50, #4ca1af);
@@ -60,7 +60,6 @@
 
 }
 .commentsSection{
-  width: 50%;
   display: block;
   background: linear-gradient(to right, #2c3e50, #4ca1af);
   padding: 1rem;
@@ -79,11 +78,6 @@
 .videoCategory, .videoDescription, .videoTags {
   margin-top: 0.5rem;
   color: var(--text-color); /* Consistent text color */
-}
-.videoCategory{
-  font-size: 0.85rem;
-  color: #ffa07a;
-  margin-bottom: 0.5rem;
 }
 
 .tag {
