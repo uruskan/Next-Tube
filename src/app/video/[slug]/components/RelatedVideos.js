@@ -18,7 +18,6 @@ const RelatedVideos = ({ currentVideoId }) => {
 
   return (
     <div className={styles.relatedVideos}>
-      <h2>Related Videos</h2>
       {relatedVideos.map(video => (
         <VideoCard key={video._id} video={video} />
       ))}

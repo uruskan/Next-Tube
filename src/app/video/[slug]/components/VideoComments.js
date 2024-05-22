@@ -8,7 +8,7 @@ const VideoComments = ({ videoId }) => {
 
   useEffect(() => {
     const fetchComments = async () => {
-      const response = await fetch(`/api/videos/${videoId}/comments`);
+      const response = await fetch(`/api/videos/comments/?videoId=${videoId}`);
       const data = await response.json();
       setComments(data.comments);
     };
@@ -16,7 +16,8 @@ const VideoComments = ({ videoId }) => {
   }, [videoId]);
 
   return (
-    <div className={styles.videoComments}>
+    <div className={styles.commentsContainer}>
+      <div className={styles.videoComments}>
       <h2>Comments</h2>
       {comments.map(comment => (
         <div key={comment._id} className={styles.comment}>
@@ -24,6 +25,7 @@ const VideoComments = ({ videoId }) => {
           <p>{comment.text}</p>
         </div>
       ))}
+      </div>
     </div>
   );
 };

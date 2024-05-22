@@ -24,7 +24,12 @@ html, body {
 }
 @media (min-width: 768px) {
   body {
-    overflow: auto;
+    overflow: hidden;
+  }
+}
+@media (max-width: 768px) {
+  html,body{
+    overflow-y: scroll;
   }
 }
 .header {
