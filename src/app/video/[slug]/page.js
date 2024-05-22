@@ -77,7 +77,7 @@ const VideoPage = async ({ params }) => {
         <div className={styles.sideContent}>
           
           <div className={styles.relatedVideosSection}>
-            <h3>Related Videos</h3>
+            <h3 className={styles.relatedTitle}>Related Videos</h3>
             <div className={styles.relatedVideosList}>
               <RelatedVideos currentVideoId={video._id} />
             </div>

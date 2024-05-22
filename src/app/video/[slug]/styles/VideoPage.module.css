@@ -99,6 +99,13 @@
   color: var(--text-color);
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   overflow-y: auto;
+  text-align: center;
+}
+.relatedTitle{
+  display: block;
+  padding: 1rem;
+  border-radius: 8px;
+  background: rgba(0, 0, 0, 0.6);
 }
 
 .comment {
