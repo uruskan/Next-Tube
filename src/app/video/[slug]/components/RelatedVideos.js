@@ -1,32 +1,58 @@
 'use client';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import VideoCard from '@/app/components/VideoCard'; // Assuming you have a VideoCard component
 import styles from '../styles/RelatedVideos.module.css';
 
-const RelatedVideos = ({ currentVideoId }) => {
-  const [relatedVideos, setRelatedVideos] = useState([]);
+const RelatedVideos = () => {
+  const [videos, setVideos] = useState([]);
+  const [page, setPage] = useState(1);
+  const [hasMore, setHasMore] = useState(true);
+  const observer = useRef();
+
+  const fetchVideos = async (page) => {
+    const response = await fetch(`/api/videos?page=${page}`);
+    const data = await response.json();
+    return data;
+  };
 
   useEffect(() => {
-    const fetchRelatedVideos = async () => {
-      const response = await fetch(`/api/videos/${currentVideoId}/related`);
-      const data = await response.json();
-      setRelatedVideos(data.relatedVideos);
+    const loadMoreVideos = async () => {
+      const { videos: newVideos, hasMore: moreVideos } = await fetchVideos(page);
+      setVideos((prev) => [...prev, ...newVideos]);
+      setHasMore(moreVideos);
     };
-    fetchRelatedVideos();
-  }, [currentVideoId]);
+
+    loadMoreVideos();
+  }, [page]);
+
+  const lastVideoElementRef = useCallback((node) => {
+    if (observer.current) observer.current.disconnect();
+    observer.current = new IntersectionObserver((entries) => {
+      if (entries[0].isIntersecting && hasMore) {
+        setPage((prevPage) => prevPage + 1);
+      }
+    });
+    if (node) observer.current.observe(node);
+  }, [hasMore]);
 
   return (
     <div className={styles.relatedVideos}>
-      {relatedVideos.map(video => (
-        <VideoCard key={video._id} video={video} />
+      {videos.map((video, index) => (
+        <VideoCard
+          key={video._id}
+          video={video}
+          ref={index === videos.length - 1 ? lastVideoElementRef : null}
+        />
       ))}
+      {!hasMore && <p className={styles.text}>No more videos</p>}
     </div>
   );
 };
 
 RelatedVideos.propTypes = {
-  currentVideoId: PropTypes.string.isRequired,
+  initialVideos: PropTypes.array,
+  initialHasMore: PropTypes.bool,
 };
 
 export default RelatedVideos;
