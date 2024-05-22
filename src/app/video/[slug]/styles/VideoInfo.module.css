@@ -10,11 +10,23 @@
     flex-wrap: wrap;
     gap: 0.5rem;
   }
-  
-  .tag {
-    
-    background-color: #ddd;
-    border-radius: 4px;
-    padding: 0.2rem 0.5rem;
+  .videoCategory{
+    font-size: 0.85rem;
+    color: #ffa07a;
+    margin-bottom: 0.5rem;
   }
   
+  
+  .tag {
+    background-color: #ff6347;
+    border-radius: 4px;
+    padding: 0.3rem 0.6rem;
+    font-size: 0.75rem;
+    color: #fff;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  
+  .tag:hover {
+    background-color: #ffa07a;
+    color: #fff; /* Consistent hover effect */
+  }

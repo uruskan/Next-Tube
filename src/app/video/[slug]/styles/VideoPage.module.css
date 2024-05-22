@@ -46,38 +46,58 @@
 
 .videoDetails, .commentsSection {
   margin-top: 1rem;
-  background: linear-gradient(to right, var(--primary-color), var(--secondary-color)); /* Same gradient */
+  /*background: linear-gradient(to right, var(--primary-color), var(--secondary-color)); /* Same gradient */
   border-radius: 8px; /* Consistent border radius */
   padding: 1rem;
   color: var(--text-color); /* Consistent text color */
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Consistent shadow */
   /* Ensure it grows to fill the space */
   overflow: scroll;
+  text-align: center;
+  background: linear-gradient(to right, #2c3e50, #4ca1af);
+  
+  
+
+}
+.commentsSection{
+  width: 50%;
+  display: block;
+  background: linear-gradient(to right, #2c3e50, #4ca1af);
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .videoTitle {
   font-size: 1.5rem;
   font-weight: bold;
-  color: var(--text-color); /* Consistent text color */
+  color: #fff;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
 }
 
 .videoCategory, .videoDescription, .videoTags {
   margin-top: 0.5rem;
   color: var(--text-color); /* Consistent text color */
 }
+.videoCategory{
+  font-size: 0.85rem;
+  color: #ffa07a;
+  margin-bottom: 0.5rem;
+}
 
 .tag {
-  background-color: var(--highlight-color);
+  background-color: #ff6347;
   border-radius: 4px;
   padding: 0.3rem 0.6rem;
   font-size: 0.75rem;
-  color: var(--text-color); /* Consistent text color */
-  margin-right: 0.5rem;
-  transition: background-color 0.3s ease, color 0.3s ease; /* Consistent transition */
+  color: #fff;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .tag:hover {
-  background-color: var(--text-highlight-color); /* Consistent hover effect */
+  background-color: #ffa07a;
+  color: #fff; /* Consistent hover effect */
 }
 
 .sideContent {
@@ -117,11 +137,13 @@
 
 .commentAuthor {
   font-weight: bold;
-  color: var(--highlight-color);
+  color: #ff6347;
+  margin-bottom: 0.5rem;
 }
 
 .commentContent {
-  color: var(--text-color);
+  color: #fff;
+  margin-bottom: 0.5rem;
 }
 
 .commentTimestamp {
