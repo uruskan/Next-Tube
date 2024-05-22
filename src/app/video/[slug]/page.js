@@ -64,14 +64,18 @@ const VideoPage = async ({ params }) => {
           <div className={styles.videoPlayer}>
             <VideoPlayer url={video.url} />
           </div>
+          <div className={styles.detailsCommentsContainer}>
+            
           <div className={styles.videoDetails}>
             <VideoInfo video={video} />
           </div>
-        </div>
-        <div className={styles.sideContent}>
           <div className={styles.commentsSection}>
             <VideoComments videoId={video._id} />
           </div>
+          </div>
+        </div>
+        <div className={styles.sideContent}>
+          
           <div className={styles.relatedVideosSection}>
             <h3>Related Videos</h3>
             <div className={styles.relatedVideosList}>
