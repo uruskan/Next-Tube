@@ -1,0 +1,84 @@
+.videoCard {
+    background: rgba(0, 0, 0, 0.6);
+    padding: 1rem;
+    height: 100%;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+    overflow: hidden;
+}
+
+.videoCard:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.videoThumbnail {
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 aspect ratio */
+    height: 0;
+    overflow: hidden;
+    border-radius: 8px;
+    margin-bottom: 0.5rem;
+}
+
+.videoThumbnail img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.videoDetails {
+    padding: 0.5rem 0;
+    
+}
+
+.videoTitle {
+    font-size: 1rem;
+    font-weight: bold;
+    color: #fff;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.videoCategory {
+    font-size: 0.85rem;
+    color: #ffa07a;
+    margin-bottom: 0.5rem;
+}
+
+.videoDescription {
+    font-size: 0.9rem;
+    color: #ccc;
+    margin-bottom: 0.5rem;
+}
+
+.videoTags {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.3rem;
+}
+
+.tag {
+    background-color: #ff6347;
+    border-radius: 4px;
+    padding: 0.3rem 0.6rem;
+    font-size: 0.75rem;
+    color: #fff;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.tag:hover {
+    background-color: #ffa07a;
+    color: #fff;
+}

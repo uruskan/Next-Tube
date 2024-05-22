@@ -1,0 +1,131 @@
+
+.video-page-container {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--background-color);
+  height: calc(100vh - 7vh);
+}
+
+.mainContent {
+  display: flex;
+  flex-direction: row;
+  flex-grow: 1;
+  padding: 0 1rem 1rem 1rem;
+  gap: 1rem;
+  height: calc(100vh - 7vh); /* Adjust for header height */
+}
+
+.videoPlayerContainer {
+  flex: 7;
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 1rem;
+  overflow: hidden;
+}
+
+.videoPlayer {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background-color: #000;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.videoDetails {
+  margin-top: 1rem;
+  background: linear-gradient(to right, var(--primary-color), var(--secondary-color)); /* Same gradient */
+  border-radius: 8px; /* Consistent border radius */
+  padding: 1rem;
+  color: var(--text-color); /* Consistent text color */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Consistent shadow */
+  flex-grow: 1; /* Ensure it grows to fill the space */
+  overflow-y: auto;
+}
+
+.videoTitle {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--text-color); /* Consistent text color */
+}
+
+.videoCategory, .videoDescription, .videoTags {
+  margin-top: 0.5rem;
+  color: var(--text-color); /* Consistent text color */
+}
+
+.tag {
+  background-color: var(--highlight-color);
+  border-radius: 4px;
+  padding: 0.3rem 0.6rem;
+  font-size: 0.75rem;
+  color: var(--text-color); /* Consistent text color */
+  margin-right: 0.5rem;
+  transition: background-color 0.3s ease, color 0.3s ease; /* Consistent transition */
+}
+
+.tag:hover {
+  background-color: var(--text-highlight-color); /* Consistent hover effect */
+}
+
+.sideContent {
+  flex: 3;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.commentsSection, .relatedVideosSection {
+  flex: 1;
+  background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+  border-radius: 8px;
+  padding: 1rem;
+  color: var(--text-color);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  overflow-y: auto;
+}
+
+.comment {
+  background: rgba(0, 0, 0, 0.6);
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}
+
+.commentAuthor {
+  font-weight: bold;
+  color: var(--highlight-color);
+}
+
+.commentContent {
+  color: var(--text-color);
+}
+
+.commentTimestamp {
+  font-size: 0.75rem;
+  color: var(--text-secondary-color);
+}
+
+.relatedVideosList {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+@media (max-width: 768px) {
+  .mainContent {
+    flex-direction: column;
+    height: auto; /* Ensure it grows to fit the content */
+    
+  }
+
+  .videoPlayerContainer {
+    flex: none;
+  }
+
+  .sideContent {
+    flex: none;
+  }
+}

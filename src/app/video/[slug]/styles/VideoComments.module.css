@@ -1,0 +1,10 @@
+.videoComments {
+    overflow-y: auto;
+    height: 100%;
+  }
+  
+  .comment {
+    border-bottom: 1px solid #ccc;
+    padding: 0.5rem 0;
+  }
+  

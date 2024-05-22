@@ -1,0 +1,24 @@
+.videoGridContainer {
+    padding: 1rem 1rem 1rem 1rem; /* Remove padding from the top */
+    margin: 0; /* Remove margin from the top */
+    overflow: scroll;
+  }
+  
+  .videoGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Default: 1-2 videos per line */
+    gap: 1rem;
+  }
+  
+  @media (min-width: 768px) and (max-width: 1024px) {
+    .videoGrid {
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* iPad and tablets: 2-3 videos per line */
+    }
+  }
+  
+  @media (min-width: 1025px) {
+    .videoGrid {
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Desktops and laptops: 4-6 videos per line */
+    }
+  }
+  

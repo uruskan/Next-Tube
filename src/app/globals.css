@@ -1,33 +1,72 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
 
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+  --primary-color: #2c3e50;
+  --secondary-color: #4ca1af;
+  --highlight-color: #ff6347;
+  --background-color: #111;
+  --text-color: #fff;
+  --text-secondary-color: #ccc;
+  --text-highlight-color: #ffa07a;
 }
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+html, body {
+  font-family: 'Arial', sans-serif;
+  background: linear-gradient(to right, #2c3e50, #4ca1af); 
+  color: #e0e0e0;
+  height: 100%;
+  width: 100%;
+  /*line-height: 1.6;*/
+  
+}
+@media (min-width: 768px) {
+  body {
+    overflow: auto;
   }
 }
-
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+.header {
+  background-color: rgba(0, 0, 0, 0.5);  
+  padding: 0.5rem 0;
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
+a {
+  color: #ff6347;
+  text-decoration: none;
+  transition: color 0.3s ease;
 }
+
+a:hover {
+  color: #ffa07a; 
+}
+
+.header h1 {
+  font-size: 2rem;
+  text-align: center;
+}
+
+.nav {
+  text-align: center;
+}
+
+.nav ul {
+  list-style: none;
+}
+
+.nav li {
+  display: inline-block;
+  margin: 0 1rem;
+}
+
+.nav a {
+  color: #ff6347;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.nav a:hover {
+  color: #ffa07a; 
+}
+
