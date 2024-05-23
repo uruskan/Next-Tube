@@ -1,5 +1,6 @@
 'use client';
 import React, { useState } from 'react';
+import styles from '../styles/AddVideo.module.css';
 
 const AddVideo = () => {
   const [title, setTitle] = useState('');
@@ -41,16 +42,16 @@ const AddVideo = () => {
   };
 
   return (
-    <div>
-      <h1>Add Video</h1>
-      <input value={title} onChange={e => setTitle(e.target.value)} placeholder="Title" />
-      <input value={description} onChange={e => setDescription(e.target.value)} placeholder="Description" />
-      <input value={url} onChange={e => setUrl(e.target.value)} placeholder="URL" />
-      <input value={thumbnail} onChange={e => setThumbnail(e.target.value)} placeholder="Thumbnail" />
-      <input value={tags} onChange={e => setTags(e.target.value)} placeholder="Tags (comma separated)" />
-      <input value={category} onChange={e => setCategory(e.target.value)} placeholder="Category" />
-      <input value={comments} onChange={e => setComments(e.target.value)} placeholder="Comments (comma separated)" />
-      <button onClick={handleAddVideo}>Add Video</button>
+    <div className={styles.form}>
+      <h1 className={styles.title} >Add Video</h1>
+      <input className={styles.input} value={title} onChange={e => setTitle(e.target.value)} placeholder="Title" />
+      <input className={styles.input} value={description} onChange={e => setDescription(e.target.value)} placeholder="Description" />
+      <input className={styles.input} value={url} onChange={e => setUrl(e.target.value)} placeholder="URL" />
+      <input className={styles.input} value={thumbnail} onChange={e => setThumbnail(e.target.value)} placeholder="Thumbnail" />
+      <input className={styles.input} value={tags} onChange={e => setTags(e.target.value)} placeholder="Tags (comma separated)" />
+      <input className={styles.input} value={category} onChange={e => setCategory(e.target.value)} placeholder="Category" />
+      <input className={styles.input} value={comments} onChange={e => setComments(e.target.value)} placeholder="Comments (comma separated)" />
+      <button className={styles.button} onClick={handleAddVideo}>Add Video</button>
     </div>
   );
 };
