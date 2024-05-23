@@ -51,6 +51,19 @@ Follow these instructions to get a copy of the project up and running on your lo
    ```sh
    git clone https://github.com/your-username/next-tube.git
    ```
+2. Install NPM packages
+    ```sh 
+    npm install
+    ```
+3. Set up MongoDB environment variables for local mongodb
+    ```sh
+    MONGODB_URI=<your_mongodb_uri>
+    ```
+4. Start the development server
+    ```sh
+    npm run dev
+    ```
+5. Open your browser and navigate to `http://localhost:3000`
 
 ## Contributing
 
