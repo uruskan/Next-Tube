@@ -31,19 +31,25 @@ const MassAdder = () => {
 
       // Generate random data for videos
       const videos = [];
-      for (let i = 0; i < 50; i++) { // Adjust the number of videos as needed
+      for (let i = 0; i < 5; i++) { // Adjust the number of videos as needed
         const title = getRandomItems(wordClusters, 2).join(' ');
         const description = getRandomItems(wordClusters, 5).join(' ');
         const category = getRandomItems(wordClusters, 1).join(' ');
         const tags = getRandomItems(wordClusters, 2);
-        const comments = Array.from({ length: 2 }, () => ({
-          userId: '000000000000000000000000', // Placeholder ObjectId
-          text: getRandomItems(wordClusters, 4).join(' '),
+        const randomNumberOfComments = Math.floor(Math.random() * (200 - 10 + 1)) + 10; //10-200 comments random
+        const comments = Array.from({ length: randomNumberOfComments }, () => ({
+          userId: getRandomItems(wordClusters, 1).join(''), // Get a random user ID as a string
+          text: getRandomItems(wordClusters, 4).join(' '),  // Generate random comment text
         }));
 
-        // Generate random video URL and thumbnail
-        const videoUrl = `https://www.papytane.com/mp4/aulacdes.mp4`;
-        const thumbnail = `https://via.placeholder.com/400?text=Placeholder`;
+        // Fetch random thumbnail server-side
+        const response = await fetch('/api/fetchThumbnail');
+        const data = await response.json();
+        const thumbnail = data.thumbnail;
+
+        // Generate random video URL
+        const randomId = Math.floor(Math.random() * (10**10 - 10**9 + 1)) + 10**9;
+        const videoUrl = `https://cdn4.videos.motherlessmedia.com/videos/${randomId}.mp4`;
 
         videos.push({ title, description, url: videoUrl, thumbnail, tags, category, comments });
       }

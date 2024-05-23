@@ -50,7 +50,7 @@ const VideoCard = ({ video }) => {
                             height={9} 
                             objectFit="cover" 
                             placeholder="blur" // Optional: you can add a blur placeholder for better UX
-                            blurDataURL={video.thumbnail} // Optional: base64 encoded placeholder image
+                            blurDataURL="https://via.placeholder.com/400?text=Placeholder"// Optional: base64 encoded placeholder image
                         />
                     </div>
                     <div className={styles.videoDetails}>
