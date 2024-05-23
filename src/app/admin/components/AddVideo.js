@@ -1,6 +1,6 @@
 'use client';
 import React, { useState } from 'react';
-import styles from './styles/AddVideo.module.css';
+import styles from '../styles/AddVideo.module.css';
 
 const AddVideo = () => {
   const [title, setTitle] = useState('');

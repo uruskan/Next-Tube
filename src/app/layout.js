@@ -1,6 +1,7 @@
 import { Inter } from "next/font/google";
 import "./globals.css";
 import Header from "./components/Header";
+import Head from "next/head";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -12,10 +13,24 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
+      <Head>
+        <title>{metadata.title}</title>
+        <meta name="description" content={metadata.description} />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta property="og:title" content={metadata.title} />
+        <meta property="og:description" content={metadata.description} />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="http://localhost:3000" />
+        <meta property="og:image" content="https://example.com/default-image.jpg" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={metadata.title} />
+        <meta name="twitter:description" content={metadata.description} />
+        <meta name="twitter:image" content="https://example.com/default-image.jpg" />
+      </Head>
       <body className={inter.className}>
         <Header />
         {children}
-        </body>
+      </body>
     </html>
   );
 }

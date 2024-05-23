@@ -6,6 +6,7 @@ import VideoInfo from './components/VideoInfo';
 import VideoComments from './components/VideoComments';
 import RelatedVideos from './components/RelatedVideos';
 import styles from './styles/VideoPage.module.css';
+import Head from 'next/head';
 
 async function fetchVideo(slug) {
   await connectToDatabase();
@@ -58,33 +59,65 @@ const VideoPage = async ({ params }) => {
   }
 
   return (
-    <div className={styles['video-page-container']}>
-      <div className={styles.mainContent} style={{ height: 'calc(100vh - 7vh)' }}>
-        <div className={styles.videoPlayerContainer}>
-          <div className={styles.videoPlayer}>
-            <VideoPlayer url={video.url} />
+    <>
+      <Head>
+        <title>{video.title}</title>
+        <meta name="description" content={video.description} />
+        <meta property="og:title" content={video.title} />
+        <meta property="og:description" content={video.description} />
+        <meta property="og:image" content={video.thumbnail} />
+        <meta property="og:type" content="video.other" />
+        <meta property="og:url" content={`http://localhost:3000/video/${params.slug}`} />
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "http://schema.org",
+            "@type": "VideoObject",
+            "name": video.title,
+            "description": video.description,
+            "thumbnailUrl": video.thumbnail,
+            "uploadDate": video.createdAt,
+            "contentUrl": video.url,
+            "embedUrl": video.url,
+            "publisher": {
+              "@type": "Organization",
+              "name": "YourSiteName",
+              "logo": {
+                "@type": "ImageObject",
+                "url": "https://example.com/logo.png"
+              }
+            },
+            "genre": video.category,
+            "keywords": video.tags.join(', '),
+            "interactionCount": video.views // Assuming you have a views field
+          })}
+        </script>
+      </Head>
+      <div className={styles['video-page-container']}>
+        <div className={styles.mainContent}>
+          <div className={styles.videoPlayerContainer}>
+            <div className={styles.videoPlayer}>
+              <VideoPlayer url={video.url} />
+            </div>
+            <div className={styles.detailsCommentsContainer}>
+              <div className={styles.videoDetails}>
+                <VideoInfo video={video} />
+              </div>
+              <div className={styles.commentsSection}>
+                <VideoComments videoId={video._id} />
+              </div>
+            </div>
           </div>
-          <div className={styles.detailsCommentsContainer}>
-            
-          <div className={styles.videoDetails}>
-            <VideoInfo video={video} />
-          </div>
-          <div className={styles.commentsSection}>
-            <VideoComments videoId={video._id} />
-          </div>
-          </div>
-        </div>
-        <div className={styles.sideContent}>
-          
-          <div className={styles.relatedVideosSection}>
-            <h3 className={styles.relatedTitle}>Related Videos</h3>
-            <div className={styles.relatedVideosList}>
-              <RelatedVideos currentVideoId={video._id} />
+          <div className={styles.sideContent}>
+            <div className={styles.relatedVideosSection}>
+              <h3>Related Videos</h3>
+              <div className={styles.relatedVideosList}>
+                <RelatedVideos currentVideoId={video._id} />
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

@@ -24,23 +24,23 @@ export async function GET(req) {
 
 export async function POST(req) {
   await connectToDatabase();
-  const { title, description, url, thumbnail, tags, category } = await req.json();
-  const slug = slugify(title, { lower: true, strict: true });
+  const { videos } = await req.json();
 
   try {
-    const newVideo = new Video({
-      title,
-      description,
-      url,
-      thumbnail,
-      slug,
-      tags,
-      category, // Save category
-    });
+    const newVideos = videos.map(video => ({
+      title: video.title,
+      description: video.description,
+      url: video.url,
+      thumbnail: video.thumbnail,
+      slug: slugify(video.title, { lower: true, strict: true }),
+      tags: video.tags,
+      category: video.category,
+      comments: video.comments,
+    }));
 
-    await newVideo.save();
-    return NextResponse.json(newVideo);
+    const createdVideos = await Video.insertMany(newVideos);
+    return NextResponse.json(createdVideos);
   } catch (error) {
-    return NextResponse.error(new Error('Failed to create video'));
+    return NextResponse.error(new Error('Failed to create videos and comments'));
   }
 }
