@@ -1,6 +1,7 @@
 # Next Tube
 
-Welcome to **Next Tube**, a fully-fledged video platform built with the latest version of Next.js (14). This project demonstrates cutting-edge features, optimal performance, and a seamless user experience. Whether you're a recruiter, a developer, or an enthusiast, you're about to witness the power and elegance of modern web development.
+Welcome to **Next Tube**, a fully-fledged video platform built with the latest version of Next.js (14). This project demonstrates cutting-edge features, optimal performance, and a seamless user experience.Can create thousands of videos with
+complete and I mean COMPLETE SEO components with just one click. Can server videos with infinite scroll efficiently. It will propably take some paragprahs to explain each feature, dive in to the code.
 
 ## Features
 
