@@ -1,3 +1,4 @@
+// src/app/models/Video.js
 import mongoose from 'mongoose';
 
 const commentSchema = new mongoose.Schema({
@@ -11,10 +12,10 @@ const videoSchema = new mongoose.Schema({
   description: String,
   url: String,
   thumbnail: String,
-  createdAt: { type: Date, default: Date.now },
+  createdAt: { type: Date, default: Date.now, index: true },
   slug: { type: String, unique: true, required: true, index: true },
   tags: { type: [String], index: true },
-  category: { type: String, required: true, index: true }, // Add category field
+  category: { type: String, required: true, index: true },
   comments: [commentSchema],
 });
 
