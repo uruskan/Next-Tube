@@ -46,7 +46,7 @@
 
 .videoDetails, .commentsSection {
   margin-top: 1rem;
-  /*background: linear-gradient(to right, var(--primary-color), var(--secondary-color)); /* Same gradient */
+  /* background: linear-gradient(to right, var(--primary-color), var(--secondary-color)); */
   border-radius: 8px; /* Consistent border radius */
   padding: 1rem;
   color: var(--text-color); /* Consistent text color */
@@ -58,6 +58,12 @@
   
   
 
+}
+.videoDetails{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  
 }
 .commentsSection{
   display: block;

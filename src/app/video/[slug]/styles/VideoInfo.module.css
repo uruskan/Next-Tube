@@ -3,6 +3,19 @@
     text-align: center;
   }
   
+.videoTitle {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #fff;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .videoCategory, .videoDesc {
+    margin-top: 0.5rem;
+    color: var(--text-color); /* Consistent text color */
+  }
+  
   .tags {
     padding: 0.5rem 0;
     justify-content: center;
@@ -10,7 +23,8 @@
     flex-wrap: wrap;
     gap: 0.5rem;
   }
-  .videoCategory{
+  
+  .category{
     font-size: 0.85rem;
     color: #ffa07a;
     margin-bottom: 0.5rem;

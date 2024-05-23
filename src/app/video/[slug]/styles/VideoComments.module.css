@@ -8,25 +8,31 @@
 .videoComments {
   overflow-y: auto;
   height: 100%;
-  border: 2px solid #ccc;
   padding: 0.5rem;
   background: rgba(0, 0, 0, 0.5); /* Add transparency */
   border-radius: 8px; /* Add rounded corners */
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Add shadow */
 }
-
 .comment {
-  border-bottom: 1px solid #ccc;
-  padding: 0.5rem 0;
-  color: var(--text-color); /* Consistent text color */
+  background-color: rgba(0,0,0,0.6);
+  padding: 0 0.5rem 0.5rem 0.5rem;
+  margin: 0.5rem;
+  
 }
+
 
 .commentAuthor {
   font-weight: bold;
-  color: var(--highlight-color);
+  color: #ff6347;
+  text-align: left;
+  margin-bottom: 0.5rem;
 }
 
 .commentTimestamp {
   font-size: 0.75rem;
   color: var(--text-secondary-color);
+}
+.commentText{
+  color: #fff;
+  margin-bottom: 0.5rem;
 }

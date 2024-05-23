@@ -21,8 +21,8 @@ const VideoComments = ({ videoId }) => {
       <h2>Comments</h2>
       {comments.map(comment => (
         <div key={comment._id} className={styles.comment}>
-          <p><strong>{comment.userId}</strong></p>
-          <p>{comment.text}</p>
+          <p className={styles.commentAuthor}><strong>{comment.userId}</strong></p>
+          <p className={styles.commentText}>{comment.text}</p>
         </div>
       ))}
       </div>
