@@ -7,31 +7,18 @@ import fetch from 'node-fetch';
 import { fetchVideoData } from '@/app/utils/fetchVideoData';
 
 const sitemapCache = new NodeCache({ stdTTL: 300 }); // Cache for 5 minutes
+const SITEMAP_LIMIT = 49000; // Limit for URLs per sitemap
 
 async function generateSitemap() {
   const videos = await fetchVideoData();
   const siteUrl = process.env.SITE_URL || 'http://localhost:3000';
 
-  let sitemap = `<?xml version="1.0" encoding="UTF-8"?>
-  <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-          xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">`;
+  const sitemaps = [];
+  let currentSitemap = '';
+  let count = 0;
 
-  const videoJsonLd = videos.map((video) => ({
-    '@context': 'http://schema.org',
-    '@type': 'VideoObject',
-    name: video.title,
-    description: video.description,
-    thumbnailUrl: video.thumbnail,
-    uploadDate: video.createdAt,
-    contentUrl: `${siteUrl}/video/${video.slug}`,
-    embedUrl: video.url,
-    interactionCount: video.views, // Assuming you have a views field
-    genre: video.category,
-    keywords: video.tags.join(', '),
-  }));
-
-  videos.forEach((video) => {
-    sitemap += `
+  videos.forEach((video, index) => {
+    const videoEntry = `
       <url>
         <loc>${siteUrl}/video/${video.slug}</loc>
         <lastmod>${new Date(video.createdAt).toISOString()}</lastmod>
@@ -46,16 +33,27 @@ async function generateSitemap() {
           <video:tag>${video.tags.join(', ')}</video:tag>
         </video:video>
       </url>`;
+
+    currentSitemap += videoEntry;
+    count++;
+
+    if (count >= SITEMAP_LIMIT || index === videos.length - 1) {
+      sitemaps.push(`<?xml version="1.0" encoding="UTF-8"?>
+      <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+              xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
+      ${currentSitemap}
+      </urlset>`);
+      currentSitemap = '';
+      count = 0;
+    }
   });
 
-  sitemap += '</urlset>';
-
-  return sitemap;
+  return sitemaps;
 }
 
 async function pingGoogle() {
   const siteUrl = process.env.SITE_URL || 'http://localhost:3000';
-  const sitemapUrl = `${siteUrl}/api/sitemap/`;
+  const sitemapUrl = `${siteUrl}/api/sitemap`;
 
   try {
     await fetch(`http://www.google.com/ping?sitemap=${sitemapUrl}`);
@@ -67,25 +65,37 @@ async function pingGoogle() {
 
 // Schedule cron job to reset sitemap cache every 60 minutes
 nodeCron.schedule('0 * * * *', async () => {
-  console.log('Resetting sitemap cache and regenerating sitemap.');
+  console.log('Resetting sitemap cache and regenerating sitemaps.');
   sitemapCache.flushAll();
-  const sitemap = await generateSitemap();
-  sitemapCache.set('sitemap', sitemap);
+  const sitemaps = await generateSitemap();
+  sitemaps.forEach((sitemap, index) => {
+    sitemapCache.set(`sitemap_${index + 1}`, sitemap);
+  });
 });
 
 // Schedule cron job to ping Google every 60 min
 nodeCron.schedule('0 * * * *', async () => {
-  console.log('Pinging Google to update sitemap.');
+  console.log('Pinging Google to update sitemaps.');
   await pingGoogle();
 });
 
 export async function GET(req) {
-  const cacheKey = 'sitemap';
+  const { searchParams } = new URL(req.url);
+  const page = parseInt(searchParams.get('page') || '1', 10);
+
+  const cacheKey = `sitemap_${page}`;
   let sitemap = sitemapCache.get(cacheKey);
 
   if (!sitemap) {
-    sitemap = await generateSitemap();
-    sitemapCache.set(cacheKey, sitemap);
+    const sitemaps = await generateSitemap();
+    sitemaps.forEach((sitemap, index) => {
+      sitemapCache.set(`sitemap_${index + 1}`, sitemap);
+    });
+    sitemap = sitemapCache.get(cacheKey);
+  }
+
+  if (!sitemap) {
+    return new NextResponse('Not Found', { status: 404 });
   }
 
   return new NextResponse(sitemap, {
