@@ -1,16 +1,21 @@
 .relatedVideos {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Default: 1-2 videos per line */
   gap: 1rem;
-  background: linear-gradient(to bottom, var(--primary-color), var(--secondary-color)); /* Adjust gradient direction */
-  border-radius: 8px;
   padding: 1rem;
-  color: var(--text-color);
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  overflow-y: auto;
-  text-align: center;;
 }
 
+@media (min-width: 768px) and (max-width: 1024px) {
+  .relatedVideos {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* iPad and tablets: 2-3 videos per line */
+  }
+}
+
+@media (min-width: 1025px) {
+  .relatedVideos {
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Desktops and laptops: 4-6 videos per line */
+  }
+}
 .text {
   text-align: center;
   color: var(--text-color);

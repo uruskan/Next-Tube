@@ -22,11 +22,13 @@ html, body {
   /*line-height: 1.6;*/
   
 }
+/*
 @media (min-width: 768px) {
   body {
     overflow: hidden;
   }
 }
+*/
 @media (max-width: 768px) {
   html,body{
     overflow-y: scroll;

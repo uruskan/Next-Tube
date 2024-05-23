@@ -4,21 +4,38 @@
     overflow: scroll;
   }
   
-  .videoGrid {
+  .grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Default: 1-2 videos per line */
     gap: 1rem;
+    padding: 1rem;
+    position: relative;
+    justify-content: center;
   }
   
   @media (min-width: 768px) and (max-width: 1024px) {
-    .videoGrid {
+    .grid {
       grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* iPad and tablets: 2-3 videos per line */
     }
   }
   
   @media (min-width: 1025px) {
-    .videoGrid {
+    .grid {
       grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Desktops and laptops: 4-6 videos per line */
     }
+  }
+  
+  .scrollIndicator {
+    position: fixed;
+    right: 1rem;
+    bottom: 1rem;
+    padding: 0.5rem 1rem;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border-radius: 5px;
+    font-size: 0.9rem;
+    text-align: center;
+    z-index: 1000;
+    pointer-events: none; /* Makes sure it doesn't interfere with user interactions */
   }
   

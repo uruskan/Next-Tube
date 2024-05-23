@@ -46,12 +46,11 @@
 
 .videoDetails, .commentsSection {
   margin-top: 1rem;
-  /* background: linear-gradient(to right, var(--primary-color), var(--secondary-color)); */
+  /*background: linear-gradient(to right, var(--primary-color), var(--secondary-color)); */
   border-radius: 8px; /* Consistent border radius */
   padding: 1rem;
   color: var(--text-color); /* Consistent text color */
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Consistent shadow */
-  ;
   overflow: scroll;
   text-align: center;
   background: linear-gradient(to right, #2c3e50, #4ca1af);
@@ -59,12 +58,7 @@
   
 
 }
-.videoDetails{
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  
-}
+
 .commentsSection{
   display: block;
   background: linear-gradient(to right, #2c3e50, #4ca1af);

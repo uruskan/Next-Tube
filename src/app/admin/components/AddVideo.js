@@ -1,6 +1,5 @@
 'use client';
 import React, { useState } from 'react';
-import styles from '../styles/AddVideo.module.css';
 
 const AddVideo = () => {
   const [title, setTitle] = useState('');
@@ -8,87 +7,51 @@ const AddVideo = () => {
   const [url, setUrl] = useState('');
   const [thumbnail, setThumbnail] = useState('');
   const [tags, setTags] = useState('');
-  const [category, setCategory] = useState(''); // Add category state
+  const [category, setCategory] = useState('');
+  const [comments, setComments] = useState('');
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const tagsArray = tags.split(',').map((tag) => tag.trim());
+  const handleAddVideo = async () => {
+    const video = {
+      title,
+      description,
+      url,
+      thumbnail,
+      tags: tags.split(',').map(tag => tag.trim()),
+      category,
+      comments: comments.split(',').map(text => ({ text: text.trim() })),
+    };
+
     try {
       const response = await fetch('/api/videos', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-          title,
-          description,
-          url,
-          thumbnail,
-          tags: tagsArray,
-          category, // Include category in request
-        }),
+        body: JSON.stringify(video),
       });
-      if (!response.ok) {
-        throw new Error('Failed to add video');
+
+      if (response.ok) {
+        alert('Video added successfully!');
+      } else {
+        alert('Failed to add video');
       }
-      alert('Video added successfully');
     } catch (error) {
-      console.error(error);
-      alert('Failed to add video');
+      console.error('Error adding video:', error);
     }
   };
 
   return (
-    <form className={styles.form} onSubmit={handleSubmit}>
-      <input
-        className={styles.input}
-        type="text"
-        placeholder="Title"
-        value={title}
-        onChange={(e) => setTitle(e.target.value)}
-        required
-      />
-      <textarea
-        className={styles.textarea}
-        placeholder="Description"
-        value={description}
-        onChange={(e) => setDescription(e.target.value)}
-        required
-      ></textarea>
-      <input
-        className={styles.input}
-        type="text"
-        placeholder="Video URL"
-        value={url}
-        onChange={(e) => setUrl(e.target.value)}
-        required
-      />
-      <input
-        className={styles.input}
-        type="text"
-        placeholder="Thumbnail URL"
-        value={thumbnail}
-        onChange={(e) => setThumbnail(e.target.value)}
-        required
-      />
-      <input
-        className={styles.input}
-        type="text"
-        placeholder="Tags (comma separated)"
-        value={tags}
-        onChange={(e) => setTags(e.target.value)}
-        required
-      />
-      <input
-        className={styles.input}
-        type="text"
-        placeholder="Category"
-        value={category}
-        onChange={(e) => setCategory(e.target.value)}
-        required
-      />
-      <button className={styles.button} type="submit">Add Video</button>
-    </form>
+    <div>
+      <h1>Add Video</h1>
+      <input value={title} onChange={e => setTitle(e.target.value)} placeholder="Title" />
+      <input value={description} onChange={e => setDescription(e.target.value)} placeholder="Description" />
+      <input value={url} onChange={e => setUrl(e.target.value)} placeholder="URL" />
+      <input value={thumbnail} onChange={e => setThumbnail(e.target.value)} placeholder="Thumbnail" />
+      <input value={tags} onChange={e => setTags(e.target.value)} placeholder="Tags (comma separated)" />
+      <input value={category} onChange={e => setCategory(e.target.value)} placeholder="Category" />
+      <input value={comments} onChange={e => setComments(e.target.value)} placeholder="Comments (comma separated)" />
+      <button onClick={handleAddVideo}>Add Video</button>
+    </div>
   );
 };
 

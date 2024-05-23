@@ -18,29 +18,33 @@ export async function GET(req) {
 
     return NextResponse.json({ videos, hasMore });
   } catch (error) {
+    console.error('Error fetching videos:', error);
     return NextResponse.error(new Error('Failed to fetch videos'));
   }
 }
 
 export async function POST(req) {
   await connectToDatabase();
-  const { videos } = await req.json();
+  const requestBody = await req.json();
+
+  // Check if the request contains a single video or an array of videos
+  const videos = Array.isArray(requestBody.videos) ? requestBody.videos : [requestBody];
+
+  // Ensure that each video has a valid slug
+  const validVideos = videos.map(video => {
+    const slug = slugify(video.title, { lower: true, strict: true });
+
+    return {
+      ...video,
+      slug,
+    };
+  });
 
   try {
-    const newVideos = videos.map(video => ({
-      title: video.title,
-      description: video.description,
-      url: video.url,
-      thumbnail: video.thumbnail,
-      slug: slugify(video.title, { lower: true, strict: true }),
-      tags: video.tags,
-      category: video.category,
-      comments: video.comments,
-    }));
-
-    const createdVideos = await Video.insertMany(newVideos);
-    return NextResponse.json(createdVideos);
+    const insertedVideos = await Video.insertMany(validVideos);
+    return NextResponse.json(insertedVideos, { status: 201 });
   } catch (error) {
-    return NextResponse.error(new Error('Failed to create videos and comments'));
+    console.error('Error creating videos:', error);
+    return NextResponse.json({ error: 'Failed to create videos' }, { status: 500 });
   }
 }

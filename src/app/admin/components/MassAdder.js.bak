@@ -37,7 +37,7 @@ const MassAdder = () => {
         const category = getRandomItems(wordClusters, 1).join(' ');
         const tags = getRandomItems(wordClusters, 2);
         const comments = Array.from({ length: 2 }, () => ({
-          userId: '000000000000000000000000', // Placeholder ObjectId
+          userId: getRandomItems(wordClusters,1).join(''), // Placeholder, will be replaced with ObjectId in API
           text: getRandomItems(wordClusters, 4).join(' '),
         }));
 
